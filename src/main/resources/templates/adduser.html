@@ -1,0 +1,25 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>User</title>
+<link href="css/app.css" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+<body>
+<form action="#" th:action="@{/user/add}" th:object="${user}" method="post">
+    	<p>User Id: <input type="text" th:field="*{user_id}" /></p>
+        <p>User Name: <input type="text" th:field="*{user_name}" /></p>
+        <p>Email: <input type="text" th:field="*{email}" /></p>
+        <p>Choose Operator: </p>
+        <select  th:field="*{tag_id}">
+  		 <option th:each="p: ${tags}" th:value="${p.tag_id}" th:text="${p.description}" />
+        </select>
+        <p>Choose Devices: </p>
+        <select  th:field="*{userdevices}" multiple>
+  		 <option th:each="p: ${user_devices}" th:value="${p.device_id}" th:text="${p.description}" />
+        </select>
+        <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+</form>
+<script src = "js/app.js"></script>
+</body>
+</html>
