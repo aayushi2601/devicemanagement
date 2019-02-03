@@ -11,6 +11,7 @@
     	<p>Device Id: <input type="text" th:field="*{device_id}" /></p>
         <p>Device Description: <input type="text" th:field="*{description}" /></p>
         <!-- <p>Device Status: <input type="text" th:field="*{status}" /></p> -->
+        <p>Device Status: </p>
         <select th:field="*{status}">
     	<option th:each="state : ${T(com.device.manage.model.Device.Status).values()}"
             th:value="${state}"

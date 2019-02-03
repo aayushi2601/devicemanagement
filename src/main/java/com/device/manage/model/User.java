@@ -43,6 +43,7 @@ public class User {
 	int tag_id;
 	
 	@ManyToMany(mappedBy = "deviceusers")
+	@JsonIgnore
 	Set<Device> userdevices = new HashSet<>();
 
 //	@OneToMany(mappedBy = "user",cascade=CascadeType.ALL)

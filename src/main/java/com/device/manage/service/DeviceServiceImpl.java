@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import com.device.manage.model.Device;
 import com.device.manage.model.Protocol;
 import com.device.manage.model.Tag;
+import com.device.manage.model.Tag.IsActive;
 import com.device.manage.model.User;
 
 @Service("deviceService")
@@ -66,12 +67,26 @@ public class DeviceServiceImpl implements DeviceService{
 	@Override
 	public List<Tag> returnTags()
 	{
-		return repo2.findAll();
+		final String sql = "select * from tag where taken = 0";
+		final List<Tag> ts = new ArrayList<Tag>();
+		final List<Map<String, Object>> rows = jdbcTemplate.queryForList(sql);
+
+		for (Map<String, Object> row : rows) {
+			Tag p = new Tag();
+			p.setTag_id((Integer) row.get("tag_id"));
+			p.setDescription((String) row.get("description"));
+			p.setCreated_on((Date) row.get("created_on"));
+			p.setIs_active(IsActive.values()[(Integer)row.get("is_active")]);
+			ts.add(p);
+	}
+		return ts;
 	}
 	
 	@Override
 	public void saveUser(User u)
 	{
+		jdbcTemplate.update(
+                "update tag set taken = ? where tag_id = ?", 1, u.getTag_id());
 		repo3.save(u);
 	}
 

@@ -29,6 +29,9 @@ public class Tag {
 	
 	@Column(columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
 	Date created_on;
+	
+	@Column(columnDefinition = "int default 0")
+	int taken;
 
 	public Tag() {
 		super();
@@ -41,6 +44,22 @@ public class Tag {
 		this.is_active = is_active;
 		this.created_on = created_on;
 	}
+	public Tag(int tag_id, String description, IsActive is_active, Date created_on, int taken) {
+		super();
+		this.tag_id = tag_id;
+		this.description = description;
+		this.is_active = is_active;
+		this.created_on = created_on;
+		this.taken = taken;
+	}
+	public int getTaken() {
+		return taken;
+	}
+
+	public void setTaken(int taken) {
+		this.taken = taken;
+	}
+
 	public int getTag_id() {
 		return tag_id;
 	}
